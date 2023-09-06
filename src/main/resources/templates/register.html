@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header.html :: header(title = 'Login page')"></head>
+<body>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-4">
+        <div class="row">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <form th:action="@{/register.html}" th:object="${user}" method="post">
+                        <div class="card-body p-4">
+                            <div class="row" th:if="${error != null}">
+                                <span th:text="${error}"></span>
+                            </div>
+                            <div class="row">
+                                <label>Full name</label>
+                                <input type="text"  th:field="*{name}"/>
+                            </div>
+                            <div class="row">
+                                <label>Username</label>
+                                <input type="text"  th:field="*{username}"/>
+                            </div>
+                            <div class="row">
+                                <label>Password</label>
+                                <input type="password"  th:field="*{password}"/>
+                            </div>
+                            <div class="row">
+                                <label>Retype Password</label>
+                                <input type="password"  th:field="*{passwordRe}"/>
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <button type="submit" class="btn btn-outline-dark mt-auto">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="fragments/footer.html :: footer"></div>
+</body>
+
+</html>

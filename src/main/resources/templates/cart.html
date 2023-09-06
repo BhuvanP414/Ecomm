@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header.html :: header(title = 'Homepage')"></head>
+<body>
+<div th:replace="fragments/navbar.html :: navbar(categories = ${categories})"></div>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <style type="text/css">
+.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-lqy6{text-align:right;vertical-align:top}
+</style>
+            <table class="tg" style="undefined;table-layout: fixed; width: 1805px">
+                <colgroup>
+                    <col style="width: 50%">
+                    <col style="width: 10%">
+                    <col style="width: 20%">
+                    <col style="width: 20%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tg-0pky">Product Name</th>
+                    <th class="tg-0pky">Price</th>
+                    <th class="tg-0pky">No Items</th>
+                    <th class="tg-0pky">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td class="tg-0lax" th:text="${product.getProductName()}"></td>
+                    <td class="tg-0lax" th:text="${product.getPrice()}"></td>
+                    <td class="tg-0lax" th:text="${product.getNumItems()}"></td>
+                    <td class="tg-0lax" th:text="${product.getTotalPrice()}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-lqy6" colspan="3"><strong>Total</strong></td>
+                    <td class="tg-0lax"><strong th:text="${total}"></strong></td>
+                </tr>
+                <tr>
+                    <td class="tg-lqy6" colspan="3"></td>
+                    <td class="tg-0lax">
+                        <form th:action="@{/buy.html}" method="POST">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-bag-fill me-1"></i>
+                            Buy now
+                        </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div th:replace="fragments/footer.html :: footer"></div>
+<div th:replace="fragments/cartScript.html :: cartScript"></div>
+</body>
+</html>

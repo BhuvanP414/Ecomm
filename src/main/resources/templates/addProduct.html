@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header.html :: header(title = 'Add a new product')"></head>
+<body>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-4">
+        <div class="row">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <form th:action="@{/admin/addProduct.html}" th:object="${productDto}" method="POST" enctype="multipart/form-data">
+                        <div class="card-body p-4">
+                            <div class="alert alert-danger" role="alert" th:if="${error != null}">
+                                <span th:text="${error}"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-5">
+                                    <label for="name">Product name</label>
+                                    <div class="input-group">
+                                        <input type="text" id="name" class="form-control" th:field="*{name}" required>
+                                    </div>
+                                </div>
+                                <div class="col mb-5">
+                                    <label for="price">Product price</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="price" th:field="*{price}" min="0" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="col mb-5">
+                                    <label for="inventory">Inventory</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="inventory" th:field="*{inventory}" min="0" step="1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-5">
+                                    <label for="description">Product description</label>
+                                    <div class="input-group">
+                                            <textarea class="form-control" id="description" th:field="*{description}"  rows="4" cols="50" required>
+                                            </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-5">
+                                    <label for="image">Product image</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="image" name="image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>Categories</label>
+                                <div class="form-check form-switch" th:each="category : ${allCategories}">
+                                    <input type="checkbox" name="categories" class="form-check-input"
+                                           th:value="${category.getFirst}"
+                                           th:text="${category.getSecond}"
+                                           th:field="*{categories}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <button type="submit" class="btn btn-outline-dark mt-auto">Add product</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="fragments/footer.html :: footer"></div>
+</body>
+
+</html>

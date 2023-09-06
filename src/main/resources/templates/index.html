@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="fragments/header.html :: header(title = 'Homepage')"></head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<body>
+    <div th:replace="fragments/navbar.html :: navbar(categories = ${categories})"></div>
+    <div th:replace="fragments/banner.html :: banner()"></div>
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <span th:each="product : ${products}">
+                    <div th:replace="fragments/productCard.html :: productCard(product = ${product})"></div>
+                </span>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/footer.html :: footer"></div>
+    <div th:replace="fragments/cartScript.html :: cartScript"></div>
+</body>
+</html>

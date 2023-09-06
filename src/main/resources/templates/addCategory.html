@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header.html :: header(title = 'Add a new category')"></head>
+<body>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-4">
+        <div class="row">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <form th:action="@{/admin/addCategory.html}" th:object="${categoryDto}" method="POST">
+                        <div class="card-body p-4">
+                            <div class="alert alert-danger" role="alert" th:if="${error != null}">
+                                <span th:text="${error}"></span>
+                            </div>
+                            <div class="row">
+                                    <label>Category name</label>
+                                    <input type="text" class="form-control" th:field="*{name}" required>
+                            </div>
+                            <div class="row">
+                                <select th:field="*{parentCategory}" class="form-select">
+                                    <label>Parent category</label>
+                                    <option value=""> </option>
+                                    <option th:each="category : ${existingCategories}" th:value="${category.getFirst}" th:text="${category.getSecond}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <button type="submit" class="btn btn-outline-dark mt-auto">Add category</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="fragments/footer.html :: footer"></div>
+</body>
+
+</html>

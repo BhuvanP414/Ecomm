@@ -1,0 +1,12 @@
+<script th:fragment="cartScript()">
+    updateCart = function(data) {
+        var parsedResponse = jQuery.parseJSON(data);
+        console.log(parsedResponse);
+
+        $("#noCartItems").text(parsedResponse.numItems);
+    }
+    function addToCart(itemId) {
+        var jsonString = '{ "productId": "' + itemId + '" }';
+        doPut("/cart.html", jsonString, updateCart);
+    }
+</script>
